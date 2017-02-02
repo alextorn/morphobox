@@ -1,0 +1,62 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": ["eslint:recommended", "plugin:jsx-a11y/recommended", "plugin:react/recommended", "airbnb"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "jsx-a11y", "import", "react"
+    ],
+    "settings": {
+        "import/ignore": [
+            "node_modules",
+            "\\.(json|css|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$",
+        ],
+        "import/extensions": [".js"],
+        "import/resolver": {
+            node: {
+                extensions: [".js", ".json"]
+            }
+        }
+    },
+    "rules": {
+        "no-console": 0,
+        "no-underscore-dangle": 1,
+        "quotes": [2, "single"],
+        "arrow-parens": [
+          "error",
+          "always"
+        ],
+        "arrow-body-style": [
+          2,
+          "as-needed"
+        ],
+        "prefer-template": 2,
+        "comma-dangle": [
+          "error",
+          "never"
+        ],
+        "import/imports-first": 0,
+        "import/newline-after-import": 0,
+        "import/no-dynamic-require": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/no-named-as-default": 0,
+        "import/no-unresolved": 2,
+        "import/prefer-default-export": 0,
+        "react/jsx-filename-extension": 0,
+        "no-unused-vars": [2, { vars: all, args: none }],
+        "no-param-reassign": [2, {"props": false}],
+        "react/forbid-prop-types": 0
+    }
+}
