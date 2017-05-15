@@ -10,4 +10,11 @@ Simply generate any ideas with Morphobox
 4. ```npm run build``` Builds the app for production to the ```build``` folder.
 
 
+### Coming soon
+1. UI for mobile devices
+2. Local storage integration to load and save data
+3. Re-build to Progressive Web App (PWA) to work offline
+4. Add test coverage for React components
+
+
 
