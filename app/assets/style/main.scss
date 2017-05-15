@@ -50,7 +50,9 @@ button, input, textarea {
 	display: flex;
 	justify-content: center;
 }
-
+.form_row + .form_row{
+    margin-top: 1rem;
+}
 label{
 	font-weight: 700;
     margin: 0 0 .25rem;
@@ -80,6 +82,12 @@ label{
     -moz-osx-font-smoothing: grayscale;
     box-shadow: none;
     height: auto;
+}
+.input_title{
+    background: none;
+    outline: none;
+    border: none;
+    width: 100%;
 }
 .input_phone{
     padding-left: 4rem;
@@ -135,10 +143,46 @@ label{
 	padding-right: 37px;
 }
 
+.h2{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+    color: #555459;
+    margin: 1rem 0;
+}
+
 .grid{
 	display: flex;
 	flex-wrap: wrap;
 	border-left: 1px solid #C5C5C5;
+
+    &_head {
+        position: relative;
+        height: 64px;
+
+        .h2{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+        .input_title {
+            background: #fff;
+            padding: 0;
+            z-index: 1;
+        }
+
+        &.input_fill {
+            .input_title {
+                z-index: 3;
+            }
+        }
+    }
+    &_title{
+        padding: 0.1rem 0 0.2rem;
+        cursor: pointer;
+        z-index: 2;
+    }
 	&_col {
 		position: relative;
 		border-width: 1px 1px 1px 0;
@@ -146,13 +190,65 @@ label{
 		border-color: #C5C5C5;
 		min-width: 200px;
 		max-width: 300px;
+
+        &_head {
+            position: relative;
+            border-bottom: 1px solid #C5C5C5;
+            height: 51px;
+
+            .input_text {
+                position: absolute;
+                top: 0;
+                left: 0;
+                border: none;
+                border-radius: 0;
+                z-index: 1;
+            }
+            &.input_fill {
+                .input_text {
+                    z-index: 3;
+                }
+            }
+        }
+
+        &_title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #fff;
+            border: none;
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+            font-size: 1rem;
+            outline: none;
+            color: #555459;
+            cursor: pointer;
+            padding: 0;
+            z-index: 2;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
 	}
 	&_row{
 		padding: 1rem 20px;
 	}
-	&_head {
-		border-bottom: 1px solid #C5C5C5;
-	}
+    &_text {
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            .btn_del {
+                display: block;
+            }
+        }
+
+        .btn_del {
+            top: 1rem;
+            display: none;
+        }
+    }
 	&_result, &_btn {
 		margin-top: 2rem;
 	}
@@ -164,17 +260,27 @@ label{
 	padding: 0 20px;
 	
 }
+
 .btn_plus{
 	background: none;
 	border: 0;
+    cursor: pointer;
 	outline: none;
 	font-size: 2rem;
 }
 
 .btn_del{
 	position: absolute;
+    cursor: pointer;
 	top: 10px;
 	right: 10px;
+    z-index: 5;
+}
+
+.btn_edit {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .infinite_spinner{

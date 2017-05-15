@@ -48,8 +48,31 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: ['css-loader?-autoprefixer', 'postcss-loader', 'sass-loader?sourceMap']
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader?-autoprefixer'
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [
+                  autoprefixer({ browsers: [
+                    '>1%',
+                    'last 2 versions'
+                  ] })
+                ],
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
+          // ['css-loader?-autoprefixer', 'postcss-loader', 'sass-loader?sourceMap']
         }),
         include: paths.appStyle
       },
@@ -84,19 +107,19 @@ module.exports = {
         }
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: paths.appSrc,
-        postcss: [
-          autoprefixer({
-            browsers: [
-              '>1%',
-              'last 2 versions'
-            ]
-          })
-        ]
-      }
-    }),
+    // new webpack.LoaderOptionsPlugin({
+    //   options: {
+    //     context: paths.appSrc,
+    //     postcss: [
+    //       autoprefixer({
+    //         browsers: [
+    //           '>1%',
+    //           'last 2 versions'
+    //         ]
+    //       })
+    //     ]
+    //   }
+    // }),
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl
     }),

@@ -5,15 +5,18 @@ import data from '../data';
 
 class MorphoBox extends React.Component {
   state = {
+    targetTitle: '',
     cols: [],
     colNumber: '',
-    rand: []
+    rand: [],
+    isDisabled: true
   }
 
   componentWillMount() {
     this.setState({
-      cols: data,
-      colNumber: data.length
+      targetTitle: data.title,
+      cols: data.cols,
+      colNumber: data.cols.length
     });
   }
 
@@ -36,7 +39,8 @@ class MorphoBox extends React.Component {
   handleAdd = () => {
     const col = {
       id: uuidV4(),
-      title: `Column ${this.state.colNumber + 1}`,
+      title: 'Axis title',
+      showInput: false,
       rows: []
     };
 
@@ -56,9 +60,9 @@ class MorphoBox extends React.Component {
     });
   }
 
-  addRow = (val, colId) => {
-    if (val) {
-      const row = { id: uuidV4(), text: val };
+  addRow = (value, colId) => {
+    if (value) {
+      const row = { id: uuidV4(), text: value };
       const newArr = this.state.cols.filter((i) => {
         if (colId === i.id) {
           i.rows.push(row);
@@ -71,9 +75,56 @@ class MorphoBox extends React.Component {
     }
   }
 
+  changeTitle = (value, colId) => {
+    const newArr = this.state.cols.filter((i) => {
+      if (colId === i.id) {
+        i.title = value;
+      }
+      return i;
+    });
+    this.setState({
+      cols: newArr
+    });
+  }
+
+  handleTitleClick = (e) => {
+    console.log('1');
+    this.setState({
+      isDisabled: !this.state.isDisabled
+    });
+    this.titleInput.focus();
+  }
+
+  changeTargetTitle = (e) => {
+    this.setState({
+      targetTitle: e.target.value,
+      isDisabled: true
+    });
+  }
+
+  handleTitleKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      this.changeTargetTitle(e);
+      this.titleInput.blur();
+    }
+  }
+
   render() {
+    const targetTitle = this.state.targetTitle;
+    const showInput = !this.state.isDisabled ? 'input_fill' : '';
     return (
       <div>
+        <div className={`grid_head ${showInput}`}>
+          <h2 className="h2 grid_title" onClick={this.handleTitleClick}>{targetTitle}</h2>
+          <input
+            className="h2 input_title"
+            type="text"
+            defaultValue={targetTitle}
+            ref={(input) => { this.titleInput = input; }}
+            onBlur={this.changeTargetTitle}
+            onKeyUp={this.handleTitleKeyUp}
+          />
+        </div>
         <div className="grid">
           {this.state.cols.map((c) => (
             <Col
@@ -83,6 +134,8 @@ class MorphoBox extends React.Component {
               id={c.id}
               handleDel={this.handleDel}
               addRow={this.addRow}
+              changeTitle={this.changeTitle}
+              showInput={c.showInput}
             />
           ))}
           <div className="plus">

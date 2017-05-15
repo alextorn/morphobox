@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ColTitle extends React.Component {
+class DynamicTitle extends React.Component {
   state = {
     showInput: false,
     btnClicked: false
@@ -34,7 +34,7 @@ class ColTitle extends React.Component {
   render() {
     const show = this.state.showInput ? 'input_fill' : '';
     return (
-      <div className={`grid_col_head ${show}`}>
+      <div className={`grid_head ${show}`}>
         <button onClick={this.handleClick} className="grid_row grid_col_title">{this.props.title}</button>
         <input
           type="text"
@@ -49,10 +49,10 @@ class ColTitle extends React.Component {
   }
 }
 
-ColTitle.propTypes = {
+DynamicTitle.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   onBlur: PropTypes.func.isRequired
 };
 
-export default ColTitle;
+export default DynamicTitle;

@@ -57,6 +57,8 @@
         "react/jsx-filename-extension": 0,
         "no-unused-vars": [2, { vars: all, args: none }],
         "no-param-reassign": [2, {"props": false}],
-        "react/forbid-prop-types": 0
+        "react/forbid-prop-types": 0,
+        "jsx-a11y/no-static-element-interactions" : 0,
+        "jsx-a11y/img-has-alt": 'warn'
     }
 }

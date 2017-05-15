@@ -1,17 +1,23 @@
 import uuidV4 from 'uuid';
-const data = [
-  { id: uuidV4(),
-    title: 'Column 1',
-    rows: []
-  },
-  { id: uuidV4(),
-    title: 'Column 2',
-    rows: []
-  },
-  { id: uuidV4(),
-    title: 'Column 3',
-    rows: []
-  }
-];
+const data = {
+  title: 'Target title',
+  cols: [
+    { id: uuidV4(),
+      title: 'Axis title',
+      showInput: false,
+      rows: []
+    },
+    { id: uuidV4(),
+      title: 'Axis title',
+      showInput: false,
+      rows: []
+    },
+    { id: uuidV4(),
+      title: 'Axis title',
+      showInput: false,
+      rows: []
+    }
+  ]
+};
 
 export default data;

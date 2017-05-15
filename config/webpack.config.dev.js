@@ -13,7 +13,7 @@ const publicUrl = '';
 
 // Get environment variables to inject into our app.
 // var env = getClientEnvironment(publicUrl);
-
+process.traceDeprecation = true;
 // Setting webpack
 module.exports = {
   devtool: 'eval',
@@ -60,7 +60,29 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader', 'sass-loader'],
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader?-autoprefixer'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                autoprefixer({ browsers: [
+                  '>1%',
+                  'last 2 versions'
+                ] })
+              ]
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ],
+        // loader: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader', 'sass-loader'],
         include: paths.appStyle
       },
       {
@@ -93,19 +115,19 @@ module.exports = {
         }
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: paths.appSrc,
-        postcss: [
-          autoprefixer({
-            browsers: [
-              '>1%',
-              'last 2 versions'
-            ]
-          })
-        ]
-      }
-    }),
+    // new webpack.LoaderOptionsPlugin({
+    //   options: {
+    //     context: paths.appSrc,
+    //     postcss: [
+    //       autoprefixer({
+    //         browsers: [
+    //           '>1%',
+    //           'last 2 versions'
+    //         ]
+    //       })
+    //     ]
+    //   }
+    // }),
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl
     }),
