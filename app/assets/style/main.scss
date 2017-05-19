@@ -125,6 +125,11 @@ label{
     padding:8px 14px 9px;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color .3s;
+}
+.btn[disabled] {
+    background-color: #C5C5C5;
+    cursor: default;
 }
 .btn:active{
 	outline: 0;

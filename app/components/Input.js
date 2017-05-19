@@ -1,27 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ addRow, id }) => {
-  let input;
-  return (
-    <div className="grid_row">
-      <button
-        className="btn btn_sml"
-        onClick={() => { addRow(input.value, id); input.value = ''; }}
-      >+</button>
-      <input
-        className="input_text"
-        ref={(node) => {
-          input = node;
-        }}
-      />
-    </div>
-  );
-};
+class Input extends React.Component {
+  state = {
+    value: ''
+  }
+  handleChange = (e) => {
+    this.setState({
+      value: e.target.value
+    });
+  }
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.props.addRow(this.state.value, this.props.id);
+      this.state.value = '';
+    }
+  }
+  render() {
+    return (
+      <div className="grid_row">
+        <button
+          disabled={!this.state.value}
+          className="btn btn_sml"
+          onClick={() => { this.props.addRow(this.state.value, this.props.id); this.state.value = ''; }}
+        >+</button>
+        <input
+          type="text"
+          className="input_text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        />
+      </div>
+    );
+  }
+}
 
 Input.propTypes = {
-  addRow: PropTypes.any.isRequired,
-  id: PropTypes.any.isRequired
+  addRow: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default Input;

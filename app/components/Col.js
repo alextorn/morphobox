@@ -15,7 +15,7 @@ const Col = (props) => {
       <button className="btn_del" onClick={handleClick}>-</button>
       <ColTitle id={id} title={title} showInput={showInput} onBlur={changeTitle} />
       {rows.map((r) => (
-        <Row key={r.id} text={r.text} />
+        <Row key={r.id} colId={id} rowId={r.id} text={r.text} {...props} />
       ))}
       <Input {...props} />
     </div>

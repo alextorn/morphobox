@@ -9,7 +9,8 @@ class MorphoBox extends React.Component {
     cols: [],
     colNumber: '',
     rand: [],
-    isDisabled: true
+    isDisabled: true,
+    canGenerate: false
   }
 
   componentWillMount() {
@@ -25,10 +26,23 @@ class MorphoBox extends React.Component {
     return rowItem.text;
   }
 
+  checkCanGenetare = (colId) => {
+    const newArr = this.state.cols.filter((i) => i.rows.length !== 0);
+    if (newArr.length > 1) {
+      this.setState({
+        canGenerate: true
+      });
+    } else {
+      this.setState({
+        canGenerate: false
+      });
+    }
+  }
+
   handleGen = () => {
     const randArr = [];
     const newArr = this.state.cols.filter((i) => i.rows.length !== 0);
-    if (newArr.length) {
+    if (newArr.length > 1) {
       newArr.map((i) => randArr.push(this.getRandomRow(i.rows)));
     }
     this.setState({
@@ -71,8 +85,16 @@ class MorphoBox extends React.Component {
       });
       this.setState({
         cols: newArr
-      });
+      }, this.checkCanGenetare(colId));
     }
+  }
+
+  delRow = (rowId, colId) => {
+    const newArr = this.state.cols.map((c) =>
+      (c.id === colId ? { ...c, rows: c.rows.filter((r) => r.id !== rowId) } : c));
+    this.setState({
+      cols: newArr
+    }, () => { this.checkCanGenetare(colId); });
   }
 
   changeTitle = (value, colId) => {
@@ -88,7 +110,6 @@ class MorphoBox extends React.Component {
   }
 
   handleTitleClick = (e) => {
-    console.log('1');
     this.setState({
       isDisabled: !this.state.isDisabled
     });
@@ -134,6 +155,7 @@ class MorphoBox extends React.Component {
               id={c.id}
               handleDel={this.handleDel}
               addRow={this.addRow}
+              delRow={this.delRow}
               changeTitle={this.changeTitle}
               showInput={c.showInput}
             />
@@ -143,7 +165,7 @@ class MorphoBox extends React.Component {
           </div>
         </div>
         <div className="grid_btn">
-          <button className="btn" onClick={this.handleGen}>Generate</button>
+          <button className="btn" disabled={!this.state.canGenerate} onClick={this.handleGen}>Generate</button>
         </div>
         <div className="grid_result">Result: {this.state.rand}</div>
       </div>
