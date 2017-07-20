@@ -50,6 +50,7 @@ button, input, textarea {
 	display: flex;
 	justify-content: center;
 }
+
 .form_row + .form_row{
     margin-top: 1rem;
 }
@@ -250,13 +251,17 @@ label{
         }
 
         .btn_del {
-            top: 1rem;
             display: none;
         }
     }
 	&_result, &_btn {
 		margin-top: 2rem;
 	}
+
+    &_btn {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .plus{
@@ -277,9 +282,38 @@ label{
 .btn_del{
 	position: absolute;
     cursor: pointer;
-	top: 10px;
-	right: 10px;
+    background-color: #fff;
+    padding: 4px;
+    border: 0 none;
+    height: 22px;
+    width: 22px;
+	top: .9rem;
+	right: 20px;
+    outline: none;
+    opacity: .7;
     z-index: 5;
+    transition: opacity .4s cubic-bezier(.694,0,.335,1), transform .4s cubic-bezier(.694,0,.335,1);
+    transform: scale(.92);
+
+    &.small {
+        width: 20px;
+        height: 20px;
+    }
+
+    svg {
+        stroke: none;
+        fill: none;
+    }
+
+    line {
+        fill: none;
+        stroke: #121212;
+    }
+
+    &:hover {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .btn_edit {
@@ -288,62 +322,34 @@ label{
     right: 0;
 }
 
-.infinite_spinner{
-    position: relative;
-    &_small {
-        width: 24px;
-        height: 24px;
-    }
-    &_spinner {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        -webkit-transform: rotate(-45deg);
-        -moz-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        -webkit-animation: 1.2s cubic-bezier(.25,.29,.54,.86) 0s infinite normal none spin;
-        -moz-animation: 1.2s cubic-bezier(.25,.29,.54,.86) 0s infinite normal none spin;
-        -o-animation: 1.2s cubic-bezier(.25,.29,.54,.86) 0s infinite normal none spin;
-        animation: 1.2s cubic-bezier(.25,.29,.54,.86) 0s infinite normal none spin;
-    }
-    &_bg, &_path {
-        stroke-width: 8;
-        fill: none;
-    }
-    &_bg {
-        opacity: .2;
-        stroke: grey;
-    }
-    &_path {
-        stroke-dasharray: 55,200;
-        stroke-dashoffset: 90;
-        stroke-linecap: round;
-    }
-    &_tail {
-        -webkit-animation: 1.2s cubic-bezier(.41,.24,.64,.69) 0s infinite normal none spin;
-        -moz-animation: 1.2s cubic-bezier(.41,.24,.64,.69) 0s infinite normal none spin;
-        -o-animation: 1.2s cubic-bezier(.41,.24,.64,.69) 0s infinite normal none spin;
-        animation: 1.2s cubic-bezier(.41,.24,.64,.69) 0s infinite normal none spin;
-    }
-    &_fast {
-        animation-duration: .6s;
-    }
-    &_blue {
-        stroke: #505050;
-    }
+.spinner {
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    -ms-transform: scale(1);
+    transform: scale(1);
+    transition: all .2s ease;
 }
-@-webkit-keyframes spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}
-100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+
+.cls-1, .cls-2 {
+    fill:#555459;
+    isolation:isolate;
 }
-@-moz-keyframes spin{0%{-moz-transform:rotate(0);transform:rotate(0)}
-100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}
-}
-@-ms-keyframes spin{0%{-ms-transform:rotate(0);transform:rotate(0)}
-100%{-ms-transform:rotate(360deg);transform:rotate(360deg)}
-}
-@keyframes spin{0%{transform:rotate(0)}
-100%{transform:rotate(360deg)}
+.cls-1 { opacity:.13}
+.cls-2 { opacity:.89}
+
+@keyframes spin{
+    0% {
+        transform:rotate(0)
+    }
+    100%{
+        transform:rotate(360deg)
+    }
 }

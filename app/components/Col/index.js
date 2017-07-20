@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ColTitle from './ColTitle';
-import Row from './Row';
-import Input from './Input';
+import Button from '../Button';
+import ColTitle from '../ColTitle';
+import Line from '../Line';
+import Row from '../Row';
 
 const Col = (props) => {
-  const { id, rows, title, showInput, changeTitle } = props;
+  const { id, rows, title, showInput, changeTitle, handleDel } = props;
   const handleClick = (e) => {
-    props.handleDel(id);
+    handleDel(id);
   };
 
   return (
     <div className="grid_col">
-      <button className="btn_del" onClick={handleClick}>-</button>
+      <Button title="remove column" onClick={handleClick} />
       <ColTitle id={id} title={title} showInput={showInput} onBlur={changeTitle} />
       {rows.map((r) => (
-        <Row key={r.id} colId={id} rowId={r.id} text={r.text} {...props} />
+        <Line key={r.id} colId={id} rowId={r.id} text={r.text} {...props} />
       ))}
-      <Input {...props} />
+      <Row {...props} />
     </div>
   );
 };
@@ -27,7 +28,8 @@ Col.propTypes = {
   rows: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   showInput: PropTypes.bool.isRequired,
-  changeTitle: PropTypes.func.isRequired
+  changeTitle: PropTypes.func.isRequired,
+  handleDel: PropTypes.func.isRequired
 };
 
 export default Col;

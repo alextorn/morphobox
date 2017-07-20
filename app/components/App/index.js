@@ -1,6 +1,5 @@
 import React from 'react';
-// import SetupMorphoBox from './SetupMorphoBox';
-import MorphoBox from './MorphoBox';
+import MorphoBox from '../MorphoBox';
 
 function App(props) {
   return (

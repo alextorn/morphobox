@@ -1,0 +1,23 @@
+{ 
+  	"title": "Target title", 
+  	"cols": [
+  		{
+  			"id": "12312412",
+		  	"title": "Axis title",
+		  	"showInput": false,
+		  	"rows": []
+  		},
+  		{
+  			"id": "12312413",
+		  	"title": "Axis title",
+		  	"showInput": false,
+		  	"rows": []
+  		},
+  		{
+  			"id": "12312414",
+		  	"title": "Axis title",
+		  	"showInput": false,
+		  	"rows": []
+  		}
+  	]
+}

@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '../Button';
 
-function Row(props) {
-  const { text, rowId, colId } = props;
+function Line({ text, rowId, colId, delRow }) {
   const handleClick = (e) => {
-    props.delRow(rowId, colId);
+    delRow(rowId, colId);
   };
+
   return (
     <div className="grid_row grid_text">
       {text}
-      <button className="btn_del" onClick={handleClick}>-</button>
+      <Button title="remove row" className="small" onClick={handleClick} />
     </div>
   );
 }
 
-Row.propTypes = {
+Line.propTypes = {
   text: PropTypes.string.isRequired,
   rowId: PropTypes.string.isRequired,
   colId: PropTypes.string.isRequired,
   delRow: PropTypes.func.isRequired
 };
 
-export default Row;
+export default Line;
